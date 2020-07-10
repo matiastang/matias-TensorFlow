@@ -12,12 +12,21 @@ sudo easy_install pip
 2. 安装`Virtualenv`：
 ```
 pip install --upgrade virtualenv
+pip3 install --upgrade virtualenv
 ```
 
 3. 创建 Virtualenv 环境：
 ```
 virtualenv --system-site-packages targetDirectory # 对应 Python 2.7
 virtualenv --system-site-packages -p python3 targetDirectory # 对应 Python 3.n
+
+mkdir tensorflowLearning
+virtualenv --system-site-packages -p python3 ~/tensorflowLearning
+created virtual environment CPython3.7.2.final.0-64 in 1030ms
+  creator CPython3Posix(dest=/Users/yunxi/tensorflowLearning, clear=False, global=True)
+  seeder FromAppData(download=False, pip=bundle, setuptools=bundle, wheel=bundle, via=copy, app_data_dir=/Users/yunxi/Library/Application Support/virtualenv)
+    added seed packages: pip==20.1.1, setuptools==49.1.0, wheel==0.34.2
+  activators BashActivator,CShellActivator,FishActivator,PowerShellActivator,PythonActivator,XonshActivator
 ```
 其中 targetDirectory 表示 Virtualenv 目录树所在的顶层路径。我们假设 targetDirectory 为 ~/tensorflow，但你也可以选择任何你喜欢的路径。
 
@@ -26,6 +35,13 @@ virtualenv --system-site-packages -p python3 targetDirectory # 对应 Python 3.n
 cd targetDirectory
 source ./bin/activate # 如果是使用 bash、sh、ksh、或 zsh
 source ./bin/activate.csh # 如果是使用 csh 或 tcsh 
+
+╭─yunxi@zfqdeMac-mini.local ~
+╰─➤  cd tensorflowLearning
+╭─yunxi@zfqdeMac-mini.local ~/tensorflowLearning
+╰─➤  source ./bin/activate
+(tensorflowLearning) ╭─yunxi@zfqdeMac-mini.local ~/tensorflowLearning
+╰─➤
 ```
 前面的 source 命令会将你的命令行提示更改为以下内容：
 ```
@@ -35,6 +51,9 @@ source ./bin/activate.csh # 如果是使用 csh 或 tcsh
 5. 确保安装的 pip 版本大于或等于 8.1：
 ```
 (targetDirectory)$ easy_install -U pip
+
+pip -V
+pip 20.1.1 from /Users/yunxi/tensorflowLearning/lib/python3.7/site-packages/pip (python 3.7)
 ```
 
 6. 执行下面的命令会将 TensorFlow 及其全部依赖安装至 Virtualenv 环境中：
