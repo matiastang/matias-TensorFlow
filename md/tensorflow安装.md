@@ -1,6 +1,15 @@
+<!--
+ * @Author: matiastang
+ * @Date: 2022-07-26 16:33:46
+ * @LastEditors: matiastang
+ * @LastEditTime: 2022-07-26 17:51:43
+ * @FilePath: /matias-TensorFlow/md/tensorflow安装.md
+ * @Description: Tensorflow安装
+-->
 # tensorflow安装
 
 [mac安装TensorFlow](https://github.com/xitu/tensorflow-docs/blob/zh-hans/install/install_mac.md)
+[版本支持及下载](https://pypi.org/project/tensorflow/#files)
 
 ## 通过Virtualenv 安装
 
@@ -71,4 +80,28 @@ pip3 install --upgrade tfBinaryURL # Python 3.n
 ```
 pip3 install --upgrade \
 https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.10.0-py3-none-any.whl
+```
+
+## 问题
+
+### `pipx install tensorflow`安装不成功
+
+```
+$ pipx install tensorflow
+Fatal error from pip prevented installation. Full pip output in file:
+    /Users/matias/.local/pipx/logs/cmd_2022-07-26_17.44.15_pip_errors.log
+
+Some possibly relevant errors from pip install:
+    ERROR: Could not find a version that satisfies the requirement tensorflow (from versions: none)
+    ERROR: No matching distribution found for tensorflow
+
+Error installing tensorflow.
+```
+`pip3`可以安装
+```
+$ pip3 install tensorflow
+Defaulting to user installation because normal site-packages is not writeable
+Collecting tensorflow
+  Downloading tensorflow-2.9.1-cp38-cp38-macosx_10_14_x86_64.whl (228.5 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.6/228.5 MB 27.4 kB/s eta 2:18:15
 ```
