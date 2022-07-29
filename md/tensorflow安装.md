@@ -2,7 +2,7 @@
  * @Author: matiastang
  * @Date: 2022-07-26 16:33:46
  * @LastEditors: matiastang
- * @LastEditTime: 2022-07-26 17:51:43
+ * @LastEditTime: 2022-07-29 16:40:25
  * @FilePath: /matias-TensorFlow/md/tensorflow安装.md
  * @Description: Tensorflow安装
 -->
@@ -104,4 +104,27 @@ Defaulting to user installation because normal site-packages is not writeable
 Collecting tensorflow
   Downloading tensorflow-2.9.1-cp38-cp38-macosx_10_14_x86_64.whl (228.5 MB)
      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.6/228.5 MB 27.4 kB/s eta 2:18:15
+```
+`pipenv`报错
+```
+$ pipenv install tensorflow
+Creating a virtualenv for this project...
+Pipfile: /Users/matias/matias/MT/MTGithub/matias-TensorFlow/src/python/Pipfile
+Using /Users/matias/.pyenv/versions/3.10.5/bin/python3 (3.10.5) to create virtualenv...
+⠴ Creating virtual environment...created virtual environment CPython3.10.5.final.0-64 in 376ms
+  creator CPython3Posix(dest=/Users/matias/.local/share/virtualenvs/python-mb9SXkT4, clear=False, no_vcs_ignore=False, global=False)
+  seeder FromAppData(download=False, pip=bundle, setuptools=bundle, wheel=bundle, via=copy, app_data_dir=/Users/matias/Library/Application Support/virtualenv)
+    added seed packages: pip==21.2.4, setuptools==58.0.4, wheel==0.37.0
+  activators BashActivator,CShellActivator,FishActivator,NushellActivator,PowerShellActivator,PythonActivator
+
+✔ Successfully created virtual environment! 
+Virtualenv location: /Users/matias/.local/share/virtualenvs/python-mb9SXkT4
+Creating a Pipfile for this project...
+Installing tensorflow...
+Error:  An error occurred while installing tensorflow!
+Error text: 
+ERROR: Could not find a version that satisfies the requirement tensorflow (from versions: none)
+ERROR: No matching distribution found for tensorflow
+
+✘ Installation Failed
 ```
