@@ -2,7 +2,7 @@
  * @Author: matiastang
  * @Date: 2022-07-26 16:33:46
  * @LastEditors: matiastang
- * @LastEditTime: 2022-07-29 16:40:25
+ * @LastEditTime: 2022-08-01 14:49:36
  * @FilePath: /matias-TensorFlow/md/tensorflow安装.md
  * @Description: Tensorflow安装
 -->
@@ -10,6 +10,19 @@
 
 [mac安装TensorFlow](https://github.com/xitu/tensorflow-docs/blob/zh-hans/install/install_mac.md)
 [版本支持及下载](https://pypi.org/project/tensorflow/#files)
+
+# M1安装
+
+目前anconda官网上对于macos系统只支持X86结构的，因此基于arm结构的MacOS暂时无法使用anconda来对tensorflow进行配置。虽然Anconda无法在M1上运行，但是相应的替代品有Miniforge，同样也能实现类似的效果。此外，苹果官方称还支持添加metal插件，从而可以调用集成在M1芯片中的GPU部分，但是目前只支持tensorflow2.5和2.6的版本，而本节使用使用的版本是tensorflow2.4 python3.8，因此并未安装加速插件。官方安装metal方法如下：
+
+[Tensorflow Plugin - Metal - Apple Developer](https://developer.apple.com/metal/tensorflow-plugin/)
+
+通解是安装miniforge的arm64版本并在这种conda里安装
+
+[安装参考](https://zhuanlan.zhihu.com/p/478696535)
+[Anaconda和miniforge](https://zhuanlan.zhihu.com/p/379567315)
+[Anaconda和miniforge区别](https://qa.1r1g.com/sf/ask/4237287491/)
+[miniforge官网](https://github.com/conda-forge/miniforge)
 
 ## 通过Virtualenv 安装
 
@@ -128,3 +141,18 @@ ERROR: No matching distribution found for tensorflow
 
 ✘ Installation Failed
 ```
+
+### pip3 install tensorflow 太慢了
+
+使用`pip3 install tensorflow -i https://pypi.douban.com/simple`下载，比较快。
+
+### 21827 illegal hardware instruction  python3
+`M1`报`21827 illegal hardware instruction  python3`的错误，大概的原因就是不兼容arm架构
+[查看](https://stackoverflow.com/questions/65383338/zsh-illegal-hardware-instruction-python-when-installing-tensorflow-on-macbook)
+
+下载`tensorflow`安装包（支持`arm架构版本`的
+* 安装TensorFlow macos版
+```
+$ pip3 install tensorflow-macos -i https://pypi.douban.com/simple
+```
+[M1安装tensorflow](https://zhuanlan.zhihu.com/p/478696535)
