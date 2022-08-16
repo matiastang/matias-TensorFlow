@@ -2,15 +2,13 @@
 Author: matiastang
 Date: 2022-08-12 10:59:35
 LastEditors: matiastang
-LastEditTime: 2022-08-15 19:50:44
+LastEditTime: 2022-08-16 09:45:13
 FilePath: /matias-TensorFlow/src/welfareLottery/welfare_lottery_line.py
 Description: welfare lottery 折线趋势
 '''
 #!/usr/bin/python3
 #coding=utf-8
 
-from tkinter import Y
-from tokenize import Number
 import pymysql
 import matplotlib
 import matplotlib.pyplot as plt
