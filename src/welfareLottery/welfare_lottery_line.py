@@ -2,7 +2,7 @@
 Author: matiastang
 Date: 2022-08-12 10:59:35
 LastEditors: matiastang
-LastEditTime: 2023-06-01 17:51:52
+LastEditTime: 2023-06-01 18:00:35
 FilePath: /matias-TensorFlow/src/welfareLottery/welfare_lottery_line.py
 Description: welfare lottery 折线趋势
 '''
@@ -15,17 +15,17 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # 显示饼图
-def showPie(data: list[str], range: list[int]):
+def showPie(data: list, range: list):
     # 标签名称
     # labels = list(map(lambda i: str(i) if i >= 10 else ('0' + str(i)), range(1, 17)))
-    labels = [str(v) if v >= 10 else ('0' + str(v)) for v in range]
-    # # 标签数据
-    # sizes = [data.count(v) for v in labels]
-    # # 设置
-    # plt.pie(sizes,pctdistance=0.85, labels=labels, radius=1, 
-    #         autopct='%1.1f%%', shadow=False, startangle=90,wedgeprops=dict(width=0.3, edgecolor='w'))
-    # # 显示
-    # plt.show()
+    labels = [(str(v) if v >= 10 else ('0' + str(v))) for v in range]
+    # 标签数据
+    sizes = [data.count(v) for v in labels]
+    # 设置
+    plt.pie(sizes,pctdistance=0.85, labels=labels, radius=1, 
+            autopct='%1.1f%%', shadow=False, startangle=90,wedgeprops=dict(width=0.3, edgecolor='w'))
+    # 显示
+    plt.show()
 
 # 显示折线图
 # def showLine(data: list[str]):
@@ -127,7 +127,7 @@ try:
 except:
     print('查询失败----')
     connect.rollback()
-    
+
 # 显示
 # showLine(blues)
 showPie(blues, range(1, 17))
