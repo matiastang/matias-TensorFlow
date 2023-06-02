@@ -2,7 +2,7 @@
 Author: matiastang
 Date: 2022-08-12 10:59:35
 LastEditors: matiastang
-LastEditTime: 2023-06-01 18:00:35
+LastEditTime: 2023-06-02 10:20:02
 FilePath: /matias-TensorFlow/src/welfareLottery/welfare_lottery_line.py
 Description: welfare lottery 折线趋势
 '''
@@ -23,54 +23,53 @@ def showPie(data: list, range: list):
     sizes = [data.count(v) for v in labels]
     # 设置
     plt.pie(sizes,pctdistance=0.85, labels=labels, radius=1, 
-            autopct='%1.1f%%', shadow=False, startangle=90,wedgeprops=dict(width=0.3, edgecolor='w'))
+            autopct='%1.6f%%', shadow=False, startangle=90,wedgeprops=dict(width=0.3, edgecolor='w'))
     # 显示
     plt.show()
 
 # 显示折线图
-# def showLine(data: list[str]):
-#      # print(xValues)
-#     # 解决中文显示问题
-#     # 查看路径
-#     # print(matplotlib.matplotlib_fname())
-#     # plt.rcParams['font.sans-serif'] = ['SimHei']
-#     # plt.rcParams['axes.unicode_minus'] = False
-#     # 绘图
-#     plt.figure(figsize=(15,6))# 画布
-#     # plt.rcParams['font.family']='MicroSoft YaHei'  #设置字体，默认字体显示不了中文
-#     plt.plot(np.linspace(1, len(data), len(data)), data)
-#     # plt.plot(xValues, values)
-#     # plt.plot([k for k, v in values], values)
-#     plt.title("blue 则线图")# 设置图表标题
-#     plt.xlabel('code')# x轴标题
-#     plt.ylabel('blue')# y轴标题
-#     plt.ylim(1, 16)
-#     # plt.xticks([])
-#     # plt.xticks(np.linspace(0, len(xValues) - 1, len(xValues)), xValues, rotation ='vertical')
-#     # plt.yticks([])
+def showLine(data: list):
+    # print(xValues)
+    # 解决中文显示问题
+    # 查看路径
+    print(matplotlib.matplotlib_fname())
+    plt.rcParams['font.sans-serif'] = ['SimHei']
+    plt.rcParams['axes.unicode_minus'] = False
+    # 绘图
+    plt.figure(figsize=(15,6))# 画布
+    # plt.rcParams['font.family']='MicroSoft YaHei'  #设置字体，默认字体显示不了中文
+    plt.plot(np.linspace(1, len(data), len(data)), data)
+    # plt.plot(xValues, values)
+    # plt.plot([k for k, v in values], values)
+    plt.title("blue 则线图")# 设置图表标题
+    plt.xlabel('code')# x轴标题
+    plt.ylabel('blue')# y轴标题
+    plt.ylim(1, 16)
+    # plt.xticks([])
+    # plt.xticks(np.linspace(0, len(xValues) - 1, len(xValues)), xValues, rotation ='vertical')
+    # plt.yticks([])
+    plt.show()# 显示
 
-#     plt.show()# 显示
-
-# 显示red折线图
-# def showRedLine(data: list[list[str]]):
-#     # 画布
-#     plt.figure(figsize=(15,6))
-#     plt_label = 0
-#     for values in data:
-#         plt_label += 1
-#         plt.plot(np.linspace(1, len(values), len(values)), [int(i) for i in values], label = '第'+ str(plt_label) + '条线段')
-#     # plt.rcParams['font.family']='MicroSoft YaHei'  #设置字体，默认字体显示不了中文
-#     plt.rcParams['font.sans-serif'] = ['SimHei']
-#     # 设置图表标题
-#     plt.title("red line")
-#     # x轴标题
-#     plt.xlabel('code')
-#     # y轴标题
-#     plt.ylabel('red')
-#     # y轴范围
-#     plt.ylim(1, 33)
-#     # 显示
-#     plt.show()
+# 显示red折线图list[list[str]]
+def showRedLine(data: list):
+    # 画布
+    plt.figure(figsize=(15,6))
+    plt_label = 0
+    for values in data:
+        plt_label += 1
+        plt.plot(np.linspace(1, len(values), len(values)), [int(i) for i in values], label = '第'+ str(plt_label) + '条线段')
+    # plt.rcParams['font.family']='MicroSoft YaHei'  #设置字体，默认字体显示不了中文
+    plt.rcParams['font.sans-serif'] = ['SimHei']
+    # 设置图表标题
+    plt.title("red line")
+    # x轴标题
+    plt.xlabel('code')
+    # y轴标题
+    plt.ylabel('red')
+    # y轴范围
+    plt.ylim(1, 33)
+    # 显示
+    plt.show()
 
 
 # 链接mysql
@@ -129,8 +128,8 @@ except:
     connect.rollback()
 
 # 显示
-# showLine(blues)
-showPie(blues, range(1, 17))
+showLine(blues[:20])
+# showPie(blues, range(1, 17))
 # red数据降维
 allReds = np.array([v.split(',') for v in reds]).ravel()
 # showRedLine([v.split(',') for v in reds])
