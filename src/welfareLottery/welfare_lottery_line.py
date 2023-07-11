@@ -1,13 +1,14 @@
+#!/usr/bin/python3
+#coding=utf-8
+
 '''
 Author: matiastang
 Date: 2022-08-12 10:59:35
 LastEditors: matiastang
-LastEditTime: 2023-06-02 10:20:02
+LastEditTime: 2023-07-06 11:09:22
 FilePath: /matias-TensorFlow/src/welfareLottery/welfare_lottery_line.py
 Description: welfare lottery 折线趋势
 '''
-#!/usr/bin/python3
-#coding=utf-8
 
 import pymysql
 import matplotlib
@@ -21,9 +22,14 @@ def showPie(data: list, range: list):
     labels = [(str(v) if v >= 10 else ('0' + str(v))) for v in range]
     # 标签数据
     sizes = [data.count(v) for v in labels]
+    print(labels, sizes)
+    # ['01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33']
+    # [306, 296, 251, 275, 275, 328, 289, 280, 305, 293, 274, 281, 278, 333, 295, 270, 296, 287, 305, 297, 250, 317, 281, 271, 269, 302, 299, 262, 273, 252, 272, 290, 256]
+    # [306, 296, 251, 275, 275, 328, 289, 280, 305, 293, 274, 281, 278, 333, 295, 270, 296, 287, 305, 297, 250, 317, 281, 271, 269, 302, 299, 262, 273, 252, 272, 290, 256]
+    # 01,02,06,09,14,17,19,22,26,27
     # 设置
     plt.pie(sizes,pctdistance=0.85, labels=labels, radius=1, 
-            autopct='%1.6f%%', shadow=False, startangle=90,wedgeprops=dict(width=0.3, edgecolor='w'))
+            autopct='%1.3f%%', shadow=False, startangle=90,wedgeprops=dict(width=0.3, edgecolor='w'))
     # 显示
     plt.show()
 
@@ -128,7 +134,7 @@ except:
     connect.rollback()
 
 # 显示
-showLine(blues[:20])
+# showLine(blues[:20])
 # showPie(blues, range(1, 17))
 # red数据降维
 allReds = np.array([v.split(',') for v in reds]).ravel()
@@ -138,7 +144,7 @@ redDatas = [list(map(lambda item: item[v], redData)) for v in range(0, 5)]
 # showRedLine(redDatas)
 # ndarray转list
 allReds = allReds.tolist()
-# showPie(allReds, range(1, 34))
+showPie(allReds, range(1, 34))
 
 # 退出
 connect.close()
