@@ -5,7 +5,7 @@
 Author: matiastang
 Date: 2023-07-06 11:14:59
 LastEditors: matiastang
-LastEditTime: 2023-07-12 17:08:04
+LastEditTime: 2023-07-12 19:37:28
 FilePath: /matias-TensorFlow/src/welfareLottery/wl_avg.py
 Description: 
 '''
@@ -18,8 +18,16 @@ import numpy as np
 from utils.transform import transformReds
 import logging  
 logging.basicConfig(level=logging.ERROR)
-plt.rcParams['font.family'] = 'sans-serif'  # 设置中文字体  
-plt.rcParams['axes.unicode_minus'] = False  # 解决坐标轴负号乱码问题
+# plt.rcParams['font.family'] = 'sans-serif'  # 设置中文字体  
+# plt.rcParams['axes.unicode_minus'] = False  # 解决坐标轴负号乱码问题
+
+mpl.rcParams['font.family'] = ['SimHei']  
+mpl.rcParams['font.sans-serif'] = ['SimHei']  
+mpl.rcParams['font.monospace'] = ['SimHei']  
+mpl.rcParams['font.serif'] = ['SimHei']  
+mpl.rcParams['font.cursive'] = ['SimHei']  
+mpl.rcParams['font.fantasy'] = ['SimHei']
+
 
 def view_fonts(fs):  
     mpl.rcParams['font.family'] = fs  
@@ -29,6 +37,7 @@ def view_fonts(fs):
     for font in mpl.font_manager.get_fontconfig_fonts():  
         if 'DejaVu Sans' in font:  
             print(font)
+# view_fonts('DejaVu Sans')
 
 def welfareLotteryAvgLine(dates: List[int], reds: List[int]):
     # 画布
