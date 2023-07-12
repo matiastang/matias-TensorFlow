@@ -1,17 +1,39 @@
 #!/usr/bin/python3
 #coding=utf-8
 
+'''
+Author: matiastang
+Date: 2023-07-06 11:14:59
+LastEditors: matiastang
+LastEditTime: 2023-07-12 17:08:04
+FilePath: /matias-TensorFlow/src/welfareLottery/wl_avg.py
+Description: 
+'''
+
+from typing import List, Dict, Union
 import pymysql
-import matplotlib
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
+from utils.transform import transformReds
+import logging  
+logging.basicConfig(level=logging.ERROR)
+plt.rcParams['font.family'] = 'sans-serif'  # 设置中文字体  
+plt.rcParams['axes.unicode_minus'] = False  # 解决坐标轴负号乱码问题
 
-# 显示red折线图list[list[str]]
-# def showRedLine(data: list):
-def welfareLotteryAvgLine(dates: list, data: list):
+def view_fonts(fs):  
+    mpl.rcParams['font.family'] = fs  
+    fs = mpl.font_manager.FontProperties(family=fs)  
+    mpl.rcParams['font.size'] = fs.get_size()  
+    print("Available fonts:")  
+    for font in mpl.font_manager.get_fontconfig_fonts():  
+        if 'DejaVu Sans' in font:  
+            print(font)
+
+def welfareLotteryAvgLine(dates: List[int], reds: List[int]):
     # 画布
     plt.figure(figsize=(100,5))
-    plt.plot(dates, [int(i) for i in data], label = 'red svg')
+    plt.plot(dates, [i for i in reds], label = 'red svg')
     # plt.rcParams['font.family']='MicroSoft YaHei'  #设置字体，默认字体显示不了中文
     # plt.rcParams['font.sans-serif'] = ['SimHei']
     print(plt.rcParams)
@@ -42,55 +64,27 @@ connect = pymysql.connect(
 # 通过cursor执行增删查改
 cursor = connect.cursor()
 
-# 查询
-sql = """
-    SELECT * from welfare_lottery_double ORDER BY code DESC LIMIT 20;
-"""
-
-codes = []
-dates = []
-reds = []
-blues = []
+data: List[Dict[str, Union[str, int, List[int]]]] = []
 
 try:
+    # sql
+    sql = """
+        SELECT * from welfare_lottery_double ORDER BY code DESC LIMIT 20;
+    """
+    # 查询
     cursor.execute(sql)
-    #这是获取表中第一个数据
-    # result = cursor.fetchone()
-    #这是查询表中所有的数据
+    # 获取
     result=cursor.fetchall()
-    # code数据
-    codes = [item['code'] for item in result]
-    # date数据
-    dates = [item['date'] for item in result]
-    # red数据
-    reds = [item['red'] for item in result]
-    # blue数据
-    blues = [item['blue'] for item in result]
+    # 聚合
+    data = [{'code': item['code'], 'date': item['date'], 'blue': int(item['blue']), 'reds': transformReds(item['red']) } for item in result]
     
-    
-except:
-    print('查询失败----')
+except Exception as e:
+    logging.error(e)
     connect.rollback()
-
-def splitReds(reds: str) -> list[int]:
-    redList = reds.split(',')
-    return list([int(item) for item in redList])
-    # return list(map(lambda item: int(item), redList))
-# 显示
-# showLine(blues[:20])
-# showPie(blues, range(1, 17))
-# red数据降维
-allReds = np.array([v.split(',') for v in reds]).ravel()
-# showRedLine([v.split(',') for v in reds])
-redData = [splitReds(item) for item in reds]
-print(redData)
-redDatas = [list(map(lambda item: item[v], redData)) for v in range(0, 5)]
-
-datas = list(map(lambda item: sum(item)/len(item), redData))
-welfareLotteryAvgLine(codes[:10], datas[:10])
-# ndarray转list
-# allReds = allReds.tolist()
-# showPie(allReds, range(1, 34))
+    
+date = [item['date'] for item in data]
+dateReds = [np.mean(item['reds']) for item in data]
+welfareLotteryAvgLine(date[:10], dateReds[:10])
 
 # 退出
 connect.close()
