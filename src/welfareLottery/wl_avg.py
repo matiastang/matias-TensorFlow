@@ -5,7 +5,7 @@
 Author: matiastang
 Date: 2023-07-06 11:14:59
 LastEditors: matiastang
-LastEditTime: 2023-07-12 19:37:28
+LastEditTime: 2023-08-09 16:05:06
 FilePath: /matias-TensorFlow/src/welfareLottery/wl_avg.py
 Description: 
 '''
@@ -18,15 +18,29 @@ import numpy as np
 from utils.transform import transformReds
 import logging  
 logging.basicConfig(level=logging.ERROR)
+print(mpl.__version__)
 # plt.rcParams['font.family'] = 'sans-serif'  # 设置中文字体  
 # plt.rcParams['axes.unicode_minus'] = False  # 解决坐标轴负号乱码问题
 
-mpl.rcParams['font.family'] = ['SimHei']  
-mpl.rcParams['font.sans-serif'] = ['SimHei']  
-mpl.rcParams['font.monospace'] = ['SimHei']  
-mpl.rcParams['font.serif'] = ['SimHei']  
-mpl.rcParams['font.cursive'] = ['SimHei']  
-mpl.rcParams['font.fantasy'] = ['SimHei']
+# from matplotlib.font_manager import FontProperties 
+
+# mpl.rcParams['font.family'] = ['PingFang TC']  
+# mpl.rcParams['font.sans-serif'] = ['PingFang TC']  
+# mpl.rcParams['font.monospace'] = ['PingFang TC']  
+# mpl.rcParams['font.serif'] = ['PingFang TC']  
+# mpl.rcParams['font.cursive'] = ['PingFang TC']  
+# mpl.rcParams['font.fantasy'] = ['PingFang TC']
+
+import matplotlib.font_manager as font_manager
+  
+# 重新构建字体列表  
+# font_manager._rebuild()
+print('font_filename=====start')
+# 打印所有可用字体  
+for font_filename in font_manager.fontManager.ttflist:  
+    print(font_filename)
+print('font_filename=====end')
+
 
 
 def view_fonts(fs):  
@@ -43,8 +57,8 @@ def welfareLotteryAvgLine(dates: List[int], reds: List[int]):
     # 画布
     plt.figure(figsize=(100,5))
     plt.plot(dates, [i for i in reds], label = 'red svg')
-    # plt.rcParams['font.family']='MicroSoft YaHei'  #设置字体，默认字体显示不了中文
-    # plt.rcParams['font.sans-serif'] = ['SimHei']
+    # plt.rcParams['font.family']='PingFang TC'  #设置字体，默认字体显示不了中文
+    plt.rcParams['font.sans-serif'] = ['Hiragino Sans']
     print(plt.rcParams)
     # 设置图表标题
     plt.title('svg line')
