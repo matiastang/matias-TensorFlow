@@ -5,7 +5,7 @@
 Author: matiastang
 Date: 2023-07-06 11:14:59
 LastEditors: matiastang
-LastEditTime: 2023-08-09 16:05:06
+LastEditTime: 2023-08-10 09:54:46
 FilePath: /matias-TensorFlow/src/welfareLottery/wl_avg.py
 Description: 
 '''
@@ -71,7 +71,6 @@ def welfareLotteryAvgLine(dates: List[int], reds: List[int]):
     # 显示
     plt.show()
 
-
 # 链接mysql
 connect = pymysql.connect(
     host='127.0.0.1',
@@ -107,7 +106,8 @@ except Exception as e:
     
 date = [item['date'] for item in data]
 dateReds = [np.mean(item['reds']) for item in data]
-welfareLotteryAvgLine(date[:10], dateReds[:10])
+# welfareLotteryAvgLine(date[:10], dateReds[:10])
+# welfareLotteryAvgLine(date, dateReds)
 
 # 退出
 connect.close()
